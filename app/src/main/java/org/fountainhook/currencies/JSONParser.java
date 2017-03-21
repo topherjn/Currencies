@@ -1,6 +1,7 @@
 package org.fountainhook.currencies;
 
 
+import android.util.Log;
 import org.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -48,6 +49,29 @@ public class JSONParser
         }
         catch (IOException e) {
             e.printStackTrace();
+        }
+
+        //read stream into string-builder
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    sInputStream, "iso-8859-1"), 8);
+            StringBuilder stringBuilder = new StringBuilder();
+            String line = null;
+            while((line = reader.readLine()) != null) {
+                stringBuilder.append(line + "\n");
+            }
+            sInputStream.close();
+            sRawJsonString = stringBuilder.toString();
+        }
+        catch (Exception e) {
+            Log.e("Error reading Buffer: " + e.toString(), this.getClass().getSimpleName());
+        }
+
+        try {
+            sReturnJsonObject = new JSONObject(sRawJsonString);
+        }
+        catch (JSONException e) {
+            Log.e("Parser", "Error when parsing data " + e.toString());
         }
 
         //return json object
