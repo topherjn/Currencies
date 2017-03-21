@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Currencies</string>
     <string name="action_settings">Settings</string>
+    <string name="fc_title">Foreign Currency</string>
+    <string name="inputInstructions">Enter foriegn currency amount here:</string>
+    <string name="button">Calculate</string>
+    <string name="cur1">Home Currency</string>
+    <string name="result">Calculated result in home currency:</string>
 </resources>
