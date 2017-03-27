@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Currencies</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_splash">SplashActivity</string>
     <string name="fc_title">Foreign Currency</string>
     <string name="inputInstructions">Enter foriegn currency amount here:</string>
     <string name="button">Calculate</string>
