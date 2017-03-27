@@ -1,6 +1,7 @@
 package org.fountainhook.currencies;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -54,6 +55,9 @@ public class SplashActivity extends Activity
                     key = (String)iterator.next();
                     mCurrencies.add(key + " | " + jsonObject.getString(key));
                 }
+                Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
+                mainIntent.putExtra("key_arraylist", mCurrencies);
+                startActivity(mainIntent);
                 finish();
 
             }
