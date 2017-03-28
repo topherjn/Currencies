@@ -10,4 +10,6 @@
     <string name="mnu_codes_str">Search active codes</string>
     <string name="mnu_invert_str">Invert codes</string>
     <string name="mnu_exit_str">Exit</string>
+    <string name="calculating">Calculating Result...</string>
+    <string name="waitTxt">One moment please...</string>
 </resources>
