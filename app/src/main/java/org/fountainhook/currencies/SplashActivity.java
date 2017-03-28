@@ -31,6 +31,7 @@ public class SplashActivity extends Activity
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
+        new FetchCodesTask().execute(URL_CODES);
     }
 
     private class FetchCodesTask extends AsyncTask<String, Void, JSONObject> {
