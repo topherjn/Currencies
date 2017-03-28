@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -59,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        //controller: mediates model and view
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,R.layout.spinner_closed,mCurrencies);
+
+        //view: layout you see when the spinner is open
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        //assign adapters to spinners
+        mHomSpinner.setAdapter(arrayAdapter);
+        mForSpinner.setAdapter(arrayAdapter);
     }
 
     public boolean isOnline()
