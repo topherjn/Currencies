@@ -79,18 +79,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mForSpinner = (Spinner) findViewById(R.id.spn_for);
         mHomSpinner = (Spinner) findViewById(R.id.spn_hom);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Whatever", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         //controller: mediates model and view
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,R.layout.spinner_closed,mCurrencies);
 
