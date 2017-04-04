@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private String mKey;
 
     public static final String RATES = "rates";
-    public static final String URL_BASE = "http://openexchangerates.org/api/latest.jason?app_id=";
+    public static final String URL_BASE = "http://openexchangerates.org/api/latest.json?app_id=";
 
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,##0.00000");
 
