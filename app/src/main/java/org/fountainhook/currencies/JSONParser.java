@@ -1,80 +1,44 @@
 package org.fountainhook.currencies;
 
-
-import android.util.Log;
-import org.json.JSONObject;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-/**
- * Created by Joshua on 3/21/2017.
- */
+public class JSONParser {
 
-public class JSONParser
-{
-    static InputStream sInputStream = null;
-    static JSONObject sReturnJsonObject = null;
-    static String sRawJsonString = "";
+    private static final String USER_AGENT = "Mozilla/5.0";
+    public static JSONObject fetchJson(String strUrl) throws Exception {
 
-    public JSONParser() {}
+        URL url = new URL(strUrl);
+        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+        httpURLConnection.setRequestMethod("GET");
+        httpURLConnection.setRequestProperty("User-Agent", USER_AGENT);
+        int responseCode = httpURLConnection.getResponseCode();
+        if (responseCode == 200){
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(httpURLConnection.getInputStream()));
+            String inputLine;
+            StringBuffer stringBuffer = new StringBuffer();
 
-    public JSONObject getJSONFromUrl(String url) {
-
-
-        //attempt to get response from server
-        try{
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(url);
-
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            sInputStream = httpEntity.getContent();
-
-        }
-        catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        catch (ClientProtocolException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //read stream into string-builder
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    sInputStream, "iso-8859-1"), 8);
-            StringBuilder stringBuilder = new StringBuilder();
-            String line = null;
-            while((line = reader.readLine()) != null) {
-                stringBuilder.append(line + "\n");
+            while ((inputLine = bufferedReader.readLine()) != null) {
+                stringBuffer.append(inputLine);
             }
-            sInputStream.close();
-            sRawJsonString = stringBuilder.toString();
-        }
-        catch (Exception e) {
-            Log.e("Error reading Buffer: " + e.toString(), this.getClass().getSimpleName());
+            bufferedReader.close();
+            try {
+                return new JSONObject(stringBuffer.toString());
+            } catch (JSONException e) {
+                return null;
+            }
+
+        } else {
+            return null;
         }
 
-        try {
-            sReturnJsonObject = new JSONObject(sRawJsonString);
-        }
-        catch (JSONException e) {
-            Log.e("Parser", "Error when parsing data " + e.toString());
-        }
-
-        //return json object
-        return sReturnJsonObject;
     }
+
+
 }

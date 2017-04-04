@@ -40,7 +40,14 @@ public class SplashActivity extends Activity
 
         @Override
         protected JSONObject doInBackground(String... params) {
-            return new JSONParser().getJSONFromUrl(params[0]);
+            JSONObject retVal = null;
+            try {
+                retVal = new JSONParser().fetchJson(params[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return retVal;
         }
 
         @Override
